@@ -21,6 +21,7 @@ class AlumnosAll(generics.CreateAPIView):
         return Response(lista, 200)
     
 class AlumnosView(generics.CreateAPIView):
+    serializer_class = AlumnoSerializer
     # Permisos por método (sobrescribe el comportamiento default)
     # Verifica que el usuario esté autenticado para las peticiones GET, PUT y DELETE
     def get_permissions(self):

@@ -20,6 +20,7 @@ class MateriasAll(generics.CreateAPIView):
 
 
 class MateriasView(generics.CreateAPIView):
+    serializer_class = MateriaSerializer
     # Permisos por método (sobrescribe el comportamiento default)
     # Verifica que el usuario esté autenticado para las peticiones GET, PUT y DELETE
     def get_permissions(self):
