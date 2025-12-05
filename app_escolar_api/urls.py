@@ -11,7 +11,7 @@ from app_escolar_api.views import auth
 
 urlpatterns = [
     # 1. El Panel de Administración Oficial (Login Azul)
-    path('admin/', admin.site.urls),
+    path('panel-admin/', admin.site.urls),
 
     # 2. Tu API para crear administradores (Le cambiamos el nombre para no chocar)
     path('api/crear-admin/', users.AdminView.as_view()),
