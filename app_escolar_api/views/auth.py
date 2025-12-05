@@ -32,13 +32,13 @@ class CustomAuthToken(ObtainAuthToken):
             
            #Verificar que tipo de usuario quiere iniciar sesión
             
-            if role_names == 'alumno':
+            if role_names == 'alumnos':
                 alumno = Alumnos.objects.filter(user=user).first()
                 alumno = AlumnoSerializer(alumno).data
                 alumno["token"] = token.key
                 alumno["rol"] = "alumno"
                 return Response(alumno,200)
-            if role_names == 'maestro':
+            if role_names == 'maestros':
                 maestro = Maestros.objects.filter(user=user).first()
                 maestro = MaestroSerializer(maestro).data
                 maestro["token"] = token.key
