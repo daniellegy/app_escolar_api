@@ -12,7 +12,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1",".railway.app",]
 # IMPORTANTE: Confianza en orígenes para CSRF (necesario para Django 4+ en https)
 CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app',
-    'https://app-escolar-webapp-nu.vercel.app'
+    'https://app-escolar-webapp-vercel.vercel.app',
 ]
 
 INSTALLED_APPS = [
@@ -44,7 +44,7 @@ MIDDLEWARE = [
 # Configuración de CORS: define orígenes permitidos y quita CORS_ORIGIN_ALLOW_ALL
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
-    'https://app-escolar-webapp-vercel.vercel.app/'
+    'https://app-escolar-webapp-vercel.vercel.app/',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
