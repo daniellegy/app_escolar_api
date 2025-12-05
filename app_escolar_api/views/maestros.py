@@ -85,7 +85,7 @@ class MaestrosView(generics.CreateAPIView):
         #Verificar que el usuario este autenticado.
         permission_classes = (permissions.IsAuthenticated,)
         #obtenemos el maestro sin actualizar
-        maestro = get_object_or_404(Maestros, id=request.GET.get["id"])
+        maestro = get_object_or_404(Maestros, id=request.GET.get("id"))
 
         maestro.id_trabajador = request.data["id_trabajador"]
         maestro.fecha_nacimiento = request.data["fecha_nacimiento"]
