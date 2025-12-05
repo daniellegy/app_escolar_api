@@ -1,0 +1,1 @@
+web: gunicorn app_escolar_api.wsgi --log-file -

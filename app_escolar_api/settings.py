@@ -7,7 +7,14 @@ SECRET_KEY = '-_&+lsebec(whhw!%n@ww&1j=4-^j_if9x8$q778+99oz&!ms2'
 
 DEBUG = True  # en desarrollo
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1","appescolarapi-production-56e4.up.railway.app",]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1",".railway.app",]
+
+# IMPORTANTE: Confianza en orígenes para CSRF (necesario para Django 4+ en https)
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://app-escolar-webapp-nu.vercel.app'
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,6 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',     # CORS debe ir antes de CommonMiddleware
     'django.middleware.common.CommonMiddleware',
@@ -50,11 +58,6 @@ import os
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# TEMPLATES[0]["DIRS"] = [os.path.join(BASE_DIR, "templates")]
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,10 +79,11 @@ WSGI_APPLICATION = 'app_escolar_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME','neondb'),
-        'USER': os.environ.get('DB_USER', 'neondb_owner'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),  # set this in the environment (no hardcoded secrets)
-        'HOST': 'ep-winter-cell-adghtl1b-pooler.c-2.us-east-1.aws.neon.tech',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
@@ -97,6 +101,11 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
