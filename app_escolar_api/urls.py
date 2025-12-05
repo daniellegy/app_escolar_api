@@ -8,27 +8,10 @@ from app_escolar_api.views import users
 from app_escolar_api.views import alumnos
 from app_escolar_api.views import maestros
 from app_escolar_api.views import auth
-# --- AGREGAR ESTO ARRIBA CON LAS OTRAS IMPORTACIONES ---
-from django.contrib.auth.models import User
-from django.http import HttpResponse
-
-# --- AGREGAR ESTA FUNCIÓN ANTES DE LA LISTA urlpatterns ---
-def crear_superuser_view(request):
-    try:
-        # Verifica si ya existe para no dar error
-        if not User.objects.filter(username='admin').exists():
-            User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
-            return HttpResponse("✅ ¡LISTO! Usuario 'admin' creado con contraseña 'admin123'.")
-        else:
-            return HttpResponse("⚠️ El usuario 'admin' YA existía. Intenta loguearte.")
-    except Exception as e:
-        return HttpResponse(f"❌ Error: {str(e)}")
 
 urlpatterns = [
     # 1. El Panel de Administración Oficial (Login Azul)
     path('panel-admin/', admin.site.urls),
-
-    path('crear-super-secreto/', crear_superuser_view),
 
     # 2. Tu API para crear administradores (Le cambiamos el nombre para no chocar)
     path('api/crear-admin/', users.AdminView.as_view()),
